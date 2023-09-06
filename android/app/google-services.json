@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "260386183637",
+    "project_id": "idevproject-df1a2",
+    "storage_bucket": "idevproject-df1a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260386183637:android:31b496278eb469ae63455c",
+        "android_client_info": {
+          "package_name": "com.idevproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260386183637-2u9drof9s573g7gi5pja39r11r3mgmol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idevproject",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "260386183637-c1gsvb1p2uel3d5ofqhbios6hqqgqovm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPuVIluizuAe7fUmTsu460H0cX9lCKZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260386183637-c1gsvb1p2uel3d5ofqhbios6hqqgqovm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
