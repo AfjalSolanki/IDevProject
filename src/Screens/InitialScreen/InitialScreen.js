@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity, I18nManager } from 'react-native';
 import navigationStrings from '../../Navigations/navigationStrings';
 import { saveUserData } from '../../redux/reducers/auth';
@@ -20,26 +20,50 @@ import { langData } from '../../constants/langtheme/langData';
 import { themeData } from '../../constants/langtheme/themeData';
 import RNRestart from 'react-native-restart'; // Import package from node modules
 import { changeAppTheme, changeLanguage } from '../../redux/actions/appSettings';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 
 
 const { dispatch } = store;
 // create a component
 const InitialScreen = ({ navigation }) => {
-
     const [isVisible, setIsVisible] = useState(false)
-
-
     const { selectedTheme, lang } = useSelector(state => state?.appSetting)
 
+
+    useEffect(() => {
+        GoogleSignin.configure()
+    }, [])
+
+
+    const gogleLogin = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            const userInfo = await GoogleSignin.signIn();
+            console.log('------user info-----------------', userInfo);
+        } catch (error) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+                console.log(error);
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                console.log(error);
+                // operation (e.g. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                console.log(error);
+                // play services not available or outdated
+            } else {
+                console.log(error);
+                // some other error happened
+            }
+        }
+    };
     const onLogin = () => {
         dispatch(saveUserData({ isLogin: true }))
     }
-
     const privacyPolicy = (type = 1) => {
         if (type == 1) {
-            navigation.navigate(navigationStrings.WEBVIEW, {type})
+            navigation.navigate(navigationStrings.WEBVIEW, { type })
         } else {
-            navigation.navigate(navigationStrings.WEBVIEW, {type})
+            navigation.navigate(navigationStrings.WEBVIEW, { type })
         }
     }
 
@@ -92,7 +116,7 @@ const InitialScreen = ({ navigation }) => {
                     <TextComp
                         text={strings.BY_CLICKING_LOG_IN}
                         style={{ marginVertical: moderateScale(42) }}>
-                        <Text style={{color: colors.blueColor}} onPress={() => privacyPolicy(1)} >{strings.TERMS}</Text>. {strings.LEARN_HOW_WE_PRCOESS} <Text style={{color: colors.blueColor}} onPress={() => privacyPolicy(2)} >{strings.PRIVACY_POLICY}</Text> </TextComp>
+                        <Text style={{ color: colors.blueColor }} onPress={() => privacyPolicy(1)} >{strings.TERMS}</Text>. {strings.LEARN_HOW_WE_PRCOESS} <Text style={{ color: colors.blueColor }} onPress={() => privacyPolicy(2)} >{strings.PRIVACY_POLICY}</Text> </TextComp>
 
                     <ButtonComp
                         text={strings.LOG_IN_WITH_PHONE_NUMBER}
@@ -103,6 +127,7 @@ const InitialScreen = ({ navigation }) => {
 
 
                     <ButtonComp
+                        onPress={gogleLogin}
                         text={strings.LOG_IN_WITH_GOOGLE}
                         textStyle={{ color: colors.blackColor }}
                         style={{

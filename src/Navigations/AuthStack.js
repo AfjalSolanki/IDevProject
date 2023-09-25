@@ -5,6 +5,12 @@ import * as Screens from '../Screens';
 export default function (Stack) {
     return (
         <>
+
+            <Stack.Screen
+                name={navigationStrings.ONBOARDING}
+                component={Screens.OnboardingScreen}
+                options={{ headerShown: false }}
+            />
             <Stack.Screen
                 name={navigationStrings.INITIAL_SCREEN}
                 component={Screens.InitialScreen}
@@ -31,8 +37,8 @@ export default function (Stack) {
                 component={Screens.Webview}
                 options={{ headerShown: false }}
             />
-         
-            
+
+
 
         </>
     );

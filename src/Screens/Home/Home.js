@@ -28,25 +28,43 @@ const DATA = [
 const Home = () => {
     const { selectedTheme } = useSelector(state => state?.appSetting)
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = React.useState(false);
+
+    // useEffect(() => {
+    //     axios.get('https://dummyjson.com/products/category/smartphones')
+    //         .then((response) => {
+    //             console.log('------------------', response.data);           
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }, []);
+
+
 
     useEffect(() => {
-        axios.get('https://dummyjson.com/products/category/smartphones')
+        setLoading(true)
+        // Define the API endpoint URL
+        const apiUrl = 'https://jsonplaceholder.typicode.com/comments?postId=1';
+        // Make a GET request using Axios
+        axios.get(apiUrl)
             .then((response) => {
-                console.log('------------------', response.data);           
+                // Handle the successful response here
+                setData(response.data);
+                console.log('response----response', response.data);
+                setLoading(false)
 
             })
             .catch((error) => {
-                console.error(error);
+                // Handle any errors here
+                console.error('Error fetching data:', error);
+                setLoading(false)
+
             });
     }, []);
-
-
-
     const renderItem = ({ item, index }) => {
         return (
             <View style={styles.boxStyle}>
-                {/* <Loader isLoading={true} /> */}
                 <View style={styles.childview}>
                     <View style={{ flexDirection: "row", alignItems: 'center', flex: 1 }}>
                         <FastImageComp
@@ -56,11 +74,11 @@ const Home = () => {
                         <View>
 
                             <TextComp
-                                text={'Afjal'}
+                                text={item.email}
                                 style={styles.nameStyle}
                             />
                             <TextComp
-                                text='Software developer'
+                                text={item.name}
                                 style={{
                                     ...styles.bioStyle,
                                     color: selectedTheme == 'dark' ? colors.whiteColorOpacity40 : colors.blackOpacity70
@@ -80,7 +98,7 @@ const Home = () => {
                 />
 
                 <TextComp
-                    text='Lorem ipsum pipsum'
+                    text={item.body}
                     style={styles.descStyle}
                 />
 
@@ -123,8 +141,9 @@ const Home = () => {
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, padding: moderateScale(8) }}>
+                <Loader visible={loading} />
                 <FlatList
-                    data={DATA}
+                    data={data}
                     renderItem={renderItem}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item, index) => item?._id || String(index)}

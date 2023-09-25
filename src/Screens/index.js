@@ -11,4 +11,8 @@ export {default as Webview} from './Webview/Webview';
 export {default as ProfileEdit} from './ProfileEdit/ProfileEdit';
 export {default as Links} from './Links/Links';
 export {default as AddPost} from './AddPost/AddPost';
+export {default as WolecomeScreen} from './Wolecome/WolecomeScreen';
+export {default as OnboardingScreen} from './OnboardingScreen';
+
+
 

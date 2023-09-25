@@ -16,6 +16,8 @@ import fontFamily from './src/styles/fontFamily';
 import {textScale} from './src/styles/responsiveSize';
 import messaging from '@react-native-firebase/messaging';
 import {Alert} from 'react-native';
+import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
+
 const {dispatch} = store;
 const App = () => {
   useEffect(() => {
@@ -65,9 +67,19 @@ const App = () => {
     return unsubscribe;
   }, []);
 
+  const toastConfig = {
+    success: props => (
+      <BaseToast {...props} text1NumberOfLines={0} text2NumberOfLines={0} />
+    ),
+    error: props => (
+      <ErrorToast {...props} text1NumberOfLines={0} text2NumberOfLines={0} />
+    ),
+  };
+
   return (
     <Provider store={store}>
       <Routes />
+      <Toast config={toastConfig} />
       <FlashMessage
         position={'top'}
         titleStyle={{

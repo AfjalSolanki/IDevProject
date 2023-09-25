@@ -1,5 +1,6 @@
 export default {
     INITIAL_SCREEN:"initialScreen",
+    WOLECOMESCREEN:'WolecomeScreen',
     LOGIN:"login",
     SIGNUP:"signup",
     HOME:"home",
@@ -13,5 +14,6 @@ export default {
     PORFILE_EDIT:"profileEdit",
     LINKS:"links",
     ADD_POST:"addPost",
-    OTOINPUT:'OTPInput'
+    OTOINPUT:'OTPInput',
+    ONBOARDING:'OnboardingScreen'
 }

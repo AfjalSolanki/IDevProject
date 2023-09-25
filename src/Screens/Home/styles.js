@@ -45,7 +45,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: "space-between",
    },
-   childview:{ flexDirection: "row", alignItems: 'center', justifyContent: 'space-between' }
+   childview: {
+      flexDirection: "row",
+      alignItems: 'center',
+      justifyContent: 'space-between'
+   }
 });
 
 export default styles
