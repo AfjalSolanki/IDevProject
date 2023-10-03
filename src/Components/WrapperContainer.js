@@ -85,7 +85,7 @@ const WrapperContainer = ({
           {children}
         </SafeAreaView>
       </TouchableWithoutFeedback>
-      {/* <Loader isLoading={isLoading} /> */}
+      <Loader isLoading={isLoading} />
 
     </View>
   );

@@ -1,41 +1,30 @@
-
 import React from 'react';
+import { View, Modal } from 'react-native';
 import {
-  useWindowDimensions,
-  View,
-  Text,
-  ActivityIndicator,
-  StyleSheet,
-} from 'react-native';
-import {
-  BallIndicator,
-  BarIndicator,
-  DotIndicator,
-  MaterialIndicator,
-  PacmanIndicator,
-  PulseIndicator,
-  SkypeIndicator,
-  UIActivityIndicator,
-  WaveIndicator,
+    BarIndicator,
+    BallIndicator,
+    DotIndicator,
+    MaterialIndicator,
+    PacmanIndicator,
+    PulseIndicator,
+    SkypeIndicator,
+    UIActivityIndicator,
+    WaveIndicator,
 } from "react-native-indicators"
-import colors from '../styles/colors';
 import commonStyles from '../styles/commonStyles';
+import colors from '../styles/colors';
 
-const Loader = ({ visible = false }) => {
-  return (
-    visible && (
-      <View style={{
-        ...commonStyles.loader,
-      }}>
-        <UIActivityIndicator size={20} color={colors.redColor} />
-      </View>
-    )
-  );
+const Loader = ({ isLoading = false }) => {
+    if (isLoading) {
+        return (
+            <Modal transparent visible={isLoading} >
+                <View style={{ ...commonStyles.loader,  }}>
+                    <UIActivityIndicator size={25} color={colors.lighPink} />
+                </View>
+            </Modal>
+        );
+    }
+    return null;
 };
-
-const style = StyleSheet.create({
-
-
-});
 
 export default Loader;

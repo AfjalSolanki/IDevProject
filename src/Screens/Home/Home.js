@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useCallback, useEffect, useState } from 'react';
-import { View, FlatList, Text, StyleShee, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, FlatList, Text, StyleShee, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import strings from '../../constants/lang';
 import WrapperContainer from '../../Components/WrapperContainer';
 import styles from './styles'
@@ -28,7 +28,7 @@ const DATA = [
 const Home = () => {
     const { selectedTheme } = useSelector(state => state?.appSetting)
     const [data, setData] = useState([]);
-    const [loading, setLoading] = React.useState(false);
+    const [isLoading, setisLoading] = useState(false)
 
     // useEffect(() => {
     //     axios.get('https://dummyjson.com/products/category/smartphones')
@@ -43,7 +43,7 @@ const Home = () => {
 
 
     useEffect(() => {
-        setLoading(true)
+        setisLoading(true)
         // Define the API endpoint URL
         const apiUrl = 'https://jsonplaceholder.typicode.com/comments?postId=1';
         // Make a GET request using Axios
@@ -52,13 +52,13 @@ const Home = () => {
                 // Handle the successful response here
                 setData(response.data);
                 console.log('response----response', response.data);
-                setLoading(false)
+                setisLoading(false)
 
             })
             .catch((error) => {
                 // Handle any errors here
                 console.error('Error fetching data:', error);
-                setLoading(false)
+                setisLoading(false)
 
             });
     }, []);
@@ -140,8 +140,8 @@ const Home = () => {
 
     return (
         <View style={{ flex: 1 }}>
+            <Loader isLoading={isLoading} />
             <View style={{ flex: 1, padding: moderateScale(8) }}>
-                <Loader visible={loading} />
                 <FlatList
                     data={data}
                     renderItem={renderItem}

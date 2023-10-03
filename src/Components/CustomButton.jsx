@@ -57,7 +57,9 @@ const CustomButton = ({flatListRef, flatListIndex, dataLength}) => {
           flatListRef.current.scrollToIndex({index: flatListIndex.value + 1});
         } else {
           // navigation.navigate('Home');
-          navigation.navigate(navigationStrings.LOGIN)
+          // navigation.navigate(navigationStrings.LOGIN)
+          navigation.navigate(navigationStrings.INITIAL_SCREEN)
+
 
         }
       }}>
